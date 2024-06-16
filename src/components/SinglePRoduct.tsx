@@ -15,8 +15,9 @@ function SinglePRoduct() {
   let [amout, setAmout] = useState(1);
   let { product } = useLoaderData() as { product: Product };
   let { id, price, title, description, images, rating, category } = product;
-  // const count: number = useSelector((state: RootState) => state.counter.amout);
+  const count: number = useSelector((state: RootState) => state.counter.amout);
   const dispatch = useDispatch();
+  console.log(count);
 
   return (
     <div className=" px-20 flex gap-10 mt-20 items-center justify-center">
