@@ -18,9 +18,9 @@ function Novbar() {
           <span className="indicator-item badge -top-1 badge-info text-white   ">
             {count}
           </span>
-          <button className="">
+          <Link to="/cart" className="">
             <AiOutlineShoppingCart className=" size-8" />
-          </button>
+          </Link>
         </div>
       </div>
     </div>

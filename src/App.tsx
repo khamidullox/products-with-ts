@@ -4,6 +4,7 @@ import Home, { loader as HomeLoader } from "./components/Home";
 import SinglePRoduct, {
   loader as SingleLoader,
 } from "./components/SinglePRoduct";
+import Cart from "./components/Cart";
 
 function App() {
   let router = createBrowserRouter([
@@ -16,6 +17,10 @@ function App() {
           path: "/singleProdcut/:id",
           element: <SinglePRoduct />,
           loader: SingleLoader,
+        },
+        {
+          path: "/cart",
+          element: <Cart />,
         },
       ],
     },

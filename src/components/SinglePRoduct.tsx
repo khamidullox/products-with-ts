@@ -4,7 +4,7 @@ import { customFetch, formatPrice } from "../utils";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../app/store";
-import { incrementByAmount } from "../app/amoutSlice";
+import { addAmount } from "../app/amoutSlice";
 export let loader = async ({ params }: any) => {
   let req = await customFetch(`/${params.id}`);
   let product = req.data;
@@ -69,7 +69,8 @@ function SinglePRoduct() {
           <div>
             <button
               onClick={() => {
-                dispatch(incrementByAmount(amout));
+                dispatch(addAmount({ ...product, total: amout }));
+                setAmout(0);
               }}
               className=" btn btn-success  text-white"
             >

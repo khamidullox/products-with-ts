@@ -1,32 +1,39 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { Product } from "../components/interfase";
 export interface CounterState {
+  product: [Product];
   amout: number;
 }
-const initialState: CounterState = {
-  amout: 0,
+let dataFromLoclaStore = (): CounterState => {
+  const storedData = localStorage.getItem("counter");
+  return storedData ? JSON.parse(storedData) : { amout: 0, product: [] };
 };
+
 export const counterSlice = createSlice({
   name: "counter",
-  initialState,
+  initialState: dataFromLoclaStore,
   reducers: {
-    increment: (state) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state.amout += 1;
+    addAmount: (state, { payload }: PayloadAction<Product>) => {
+      let findProduct = state.product.find((prev) => {
+        return prev.id == payload.id;
+      });
+      if (findProduct) {
+        state.amout += payload.total;
+        findProduct.total += payload.total;
+      } else {
+        state.product.push(payload);
+        state.amout += payload.total;
+      }
+      counterSlice.caseReducers.setLocal(state);
     },
-    decrement: (state) => {
-      state.amout -= 1;
-    },
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.amout += action.payload;
+    setLocal: (state) => {
+      localStorage.setItem("counter", JSON.stringify(state));
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+export const { addAmount } = counterSlice.actions;
 
 export default counterSlice.reducer;

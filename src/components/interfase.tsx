@@ -11,6 +11,7 @@ interface Product {
   images: [string];
   brand: string;
   category: string;
+  total: number;
 }
 
 export type { Product, Products };
