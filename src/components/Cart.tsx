@@ -6,7 +6,7 @@ import { formatPrice } from "../utils";
 function Cart() {
   const { product } = useSelector((state: RootState) => state.counter);
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto px mx-20 ">
       <table className="table">
         {/* head */}
         <thead>
@@ -57,7 +57,6 @@ function Cart() {
           })}
         </tbody>
         {/* foot */}
-     
       </table>
     </div>
   );
